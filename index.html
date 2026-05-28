@@ -1,0 +1,1818 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHEIKH ROMAN | Creative Technologist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0a0a0a',
+                        secondary: '#111111',
+                        accent: '#00d4ff',
+                        accent2: '#ff006e',
+                        accent3: '#8338ec',
+                        roman: '#0066ff',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #00d4ff 0%, #0066ff 50%, #8338ec 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-card:hover {
+            background: rgba(255, 255, 255, 0.06);
+            border-color: rgba(0, 212, 255, 0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.1);
+        }
+        
+        .hero-gradient {
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(0, 102, 255, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(131, 56, 236, 0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
+        }
+        
+        .grid-pattern {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #0066ff);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .nav-link:hover::before {
+            transform: translateX(0);
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .whatsapp-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.3);
+        }
+        
+        .whatsapp-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .skill-bar-fill {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #00d4ff;
+            font-weight: 300;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+        }
+        
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, transparent 60%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .project-card:hover::before {
+            opacity: 1;
+        }
+        
+        .project-card:hover .project-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .project-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            z-index: 2;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .image-glow {
+            position: relative;
+        }
+        
+        .image-glow::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            background: linear-gradient(135deg, #00d4ff, #0066ff, #8338ec);
+            border-radius: 1.5rem;
+            z-index: -1;
+            opacity: 0.5;
+            filter: blur(20px);
+            animation: pulse-glow 4s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { opacity: 0.4; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.02); }
+        }
+        
+        .cursor-glow {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0,102,255,0.12) 0%, transparent 70%);
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+        
+        .floating-element {
+            animation: float-slow 8s ease-in-out infinite;
+        }
+        
+        @keyframes float-slow {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(15px, -15px) rotate(2deg); }
+            66% { transform: translate(-10px, 10px) rotate(-1deg); }
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .section-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 9999px;
+            color: #00d4ff;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+        }
+        
+        .section-tag::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #00d4ff;
+            border-radius: 50%;
+            animation: pulse-dot 2s infinite;
+        }
+        
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+        
+        .stat-number {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            background: linear-gradient(135deg, #fff 0%, #00d4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-roman selection:text-white">
+
+    <!-- Cursor Glow -->
+    <div id="cursorGlow" class="cursor-glow hidden lg:block"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <a href="#" class="font-display text-2xl font-bold tracking-tighter group">
+                    <span class="text-white group-hover:text-roman transition-colors">SR</span>
+                    <span class="text-roman">.</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#about" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors py-2">About</a>
+                    <a href="#skills" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors py-2">Skills</a>
+                    <a href="#services" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors py-2">Services</a>
+                    <a href="#projects" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors py-2">Projects</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors py-2">Contact</a>
+                </div>
+                
+                <a href="https://wa.me/88011830549107" target="_blank" class="hidden md:flex items-center gap-2 px-5 py-2.5 whatsapp-btn text-white text-sm font-semibold rounded-full">
+                    <svg class="w-4 h-4 relative z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    <span class="relative z-10">Let's Talk</span>
+                </a>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-white p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-secondary/95 backdrop-blur-xl border-t border-white/5">
+            <div class="px-6 py-8 space-y-4">
+                <a href="#about" class="block text-gray-300 hover:text-white text-lg font-medium">About</a>
+                <a href="#skills" class="block text-gray-300 hover:text-white text-lg font-medium">Skills</a>
+                <a href="#services" class="block text-gray-300 hover:text-white text-lg font-medium">Services</a>
+                <a href="#projects" class="block text-gray-300 hover:text-white text-lg font-medium">Projects</a>
+                <a href="#contact" class="block text-gray-300 hover:text-white text-lg font-medium">Contact</a>
+                <a href="https://wa.me/88011830549107" target="_blank" class="flex items-center justify-center gap-2 px-6 py-3 whatsapp-btn text-white font-semibold rounded-full mt-4">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center hero-gradient grid-pattern overflow-hidden pt-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary"></div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-32 left-[10%] w-24 h-24 border border-roman/20 rounded-full floating-element opacity-40 hidden lg:block"></div>
+        <div class="absolute bottom-40 right-[15%] w-32 h-32 border border-accent/20 rounded-full floating-element opacity-30 hidden lg:block" style="animation-delay: 2s;"></div>
+        <div class="absolute top-48 right-[25%] w-16 h-16 border border-accent3/20 rounded-full floating-element opacity-40 hidden lg:block" style="animation-delay: 4s;"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Left Content -->
+                <div class="order-2 lg:order-1 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-roman/30 bg-roman/5 text-roman text-sm font-medium mb-8 reveal">
+                        <span class="w-2 h-2 bg-roman rounded-full animate-pulse"></span>
+                        Available for Freelance Work
+                    </div>
+                    
+                    <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1]">
+                        <span class="block text-white reveal">Hi, I'm</span>
+                        <span class="block gradient-text reveal" style="animation-delay: 0.2s">SHEIKH</span>
+                        <span class="block gradient-text reveal" style="animation-delay: 0.4s">ROMAN</span>
+                    </h1>
+                    
+                    <div class="h-8 mb-8 reveal">
+                        <span class="text-xl md:text-2xl text-gray-400 font-light" id="typewriter"></span>
+                        <span class="text-roman typing-cursor"></span>
+                    </div>
+                    
+                    <p class="text-gray-400 text-lg leading-relaxed mb-10 max-w-lg mx-auto lg:mx-0 reveal">
+                        Crafting digital experiences at the intersection of <span class="text-white font-medium">Web Development</span>, 
+                        <span class="text-white font-medium">Video Production</span>, <span class="text-white font-medium">Design</span>, and 
+                        <span class="text-roman font-medium">Artificial Intelligence</span>.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start reveal">
+                        <a href="https://wa.me/88011830549107" target="_blank" class="group relative inline-flex items-center justify-center gap-3 px-8 py-4 whatsapp-btn text-white font-semibold rounded-full overflow-hidden">
+                            <svg class="w-5 h-5 relative z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            <span class="relative z-10">Text Me on WhatsApp</span>
+                            <svg class="w-4 h-4 relative z-10 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                        </a>
+                        <a href="#projects" class="inline-flex items-center justify-center gap-2 px-8 py-4 border border-white/10 text-white font-semibold rounded-full hover:bg-white/5 hover:border-white/20 transition-all">
+                            View My Work
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Photo -->
+                <div class="order-1 lg:order-2 flex justify-center lg:justify-end reveal">
+                    <div class="relative">
+                        <div class="image-glow">
+                            <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-3xl overflow-hidden bg-gradient-to-br from-roman/20 to-accent3/20 p-1">
+                                <img src="/mnt/agents/upload/Gemini_Generated_Image_65q4e265q4e265q4.png" 
+                                     alt="SHEIKH ROMAN" 
+                                     class="w-full h-full object-cover rounded-2xl"
+                                     style="object-position: center 20%;">
+                            </div>
+                        </div>
+                        <!-- Floating Badge -->
+                        <div class="absolute -bottom-4 -left-4 md:bottom-8 md:-left-8 glass-card px-4 py-3 rounded-xl whatsapp-float">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-roman to-accent flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-400">Experience</div>
+                                    <div class="text-sm font-bold text-white">5+ Years</div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Another Badge -->
+                        <div class="absolute -top-4 -right-4 md:top-8 md:-right-8 glass-card px-4 py-3 rounded-xl whatsapp-float" style="animation-delay: 1.5s;">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-accent2 to-accent3 flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-xs text-gray-400">Projects</div>
+                                    <div class="text-sm font-bold text-white">50+ Done</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 lg:py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+                <div class="order-2 lg:order-1">
+                    <div class="section-tag mb-6 reveal">About Me</div>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-8 leading-tight reveal">
+                        Bridging <span class="gradient-text">Creativity</span> & <span class="gradient-text">Technology</span>
+                    </h2>
+                    <div class="space-y-6 text-gray-400 text-lg leading-relaxed reveal">
+                        <p>
+                            I'm <strong class="text-white">SHEIKH ROMAN</strong>, a multidisciplinary creator who thrives at the crossroads of visual storytelling and cutting-edge technology. My expertise spans full-stack web development, cinematic video editing, intuitive UI/UX design, and AI integration.
+                        </p>
+                        <p>
+                            Whether it's building immersive web experiences, crafting compelling video narratives, designing pixel-perfect interfaces, or leveraging AI to push creative boundaries — I transform ideas into reality.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-3 gap-8 mt-12 reveal">
+                        <div class="text-center lg:text-left">
+                            <div class="stat-number text-4xl mb-2 counter" data-target="50">0</div>
+                            <div class="text-sm text-gray-500 font-medium uppercase tracking-wider">Projects</div>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <div class="stat-number text-4xl mb-2 counter" data-target="30">0</div>
+                            <div class="text-sm text-gray-500 font-medium uppercase tracking-wider">Clients</div>
+                        </div>
+                        <div class="text-center lg:text-left">
+                            <div class="stat-number text-4xl mb-2 counter" data-target="5">0</div>
+                            <div class="text-sm text-gray-500 font-medium uppercase tracking-wider">Years</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 reveal">
+                        <a href="https://wa.me/88011830549107" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-white text-primary font-bold rounded-full hover:bg-gray-100 transition-all hover:scale-105">
+                            <svg class="w-5 h-5 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            Start a Conversation
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2 flex justify-center reveal">
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-roman/30 to-accent3/30 rounded-3xl blur-3xl opacity-30"></div>
+                        <img src="/mnt/agents/upload/Gemini_Generated_Image_65q4e265q4e265q4.png" 
+                             alt="SHEIKH ROMAN" 
+                             class="relative w-full max-w-md rounded-3xl shadow-2xl shadow-roman/10"
+                             style="object-fit: cover; aspect-ratio: 3/4; object-position: center 15%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 lg:py-32 bg-secondary/20 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="section-tag mb-6 inline-flex reveal">Expertise</div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 reveal">Technical <span class="gradient-text">Arsenal</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal">Mastering the tools that power modern digital experiences</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Web Dev -->
+                <div class="glass-card rounded-2xl p-8 reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-roman/10 flex items-center justify-center mb-6 text-roman">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-6">Web Development</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">React / Next.js</span>
+                                <span class="text-roman font-semibold">95%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-roman to-accent rounded-full" style="width: 0%" data-width="95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Node.js</span>
+                                <span class="text-roman font-semibold">90%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-roman to-accent rounded-full" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">TypeScript</span>
+                                <span class="text-roman font-semibold">88%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-roman to-accent rounded-full" style="width: 0%" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Tailwind CSS</span>
+                                <span class="text-roman font-semibold">92%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-roman to-accent rounded-full" style="width: 0%" data-width="92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Editing -->
+                <div class="glass-card rounded-2xl p-8 reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-accent2/10 flex items-center justify-center mb-6 text-accent2">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-6">Video Editing</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Premiere Pro</span>
+                                <span class="text-accent2 font-semibold">93%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent2 to-accent3 rounded-full" style="width: 0%" data-width="93%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">After Effects</span>
+                                <span class="text-accent2 font-semibold">87%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent2 to-accent3 rounded-full" style="width: 0%" data-width="87%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">DaVinci Resolve</span>
+                                <span class="text-accent2 font-semibold">85%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent2 to-accent3 rounded-full" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Motion Graphics</span>
+                                <span class="text-accent2 font-semibold">90%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent2 to-accent3 rounded-full" style="width: 0%" data-width="90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design -->
+                <div class="glass-card rounded-2xl p-8 reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-accent3/10 flex items-center justify-center mb-6 text-accent3">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-6">UI/UX Design</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Figma</span>
+                                <span class="text-accent3 font-semibold">94%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent3 to-roman rounded-full" style="width: 0%" data-width="94%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Adobe Illustrator</span>
+                                <span class="text-accent3 font-semibold">88%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent3 to-roman rounded-full" style="width: 0%" data-width="88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Photoshop</span>
+                                <span class="text-accent3 font-semibold">91%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent3 to-roman rounded-full" style="width: 0%" data-width="91%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Brand Identity</span>
+                                <span class="text-accent3 font-semibold">86%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent3 to-roman rounded-full" style="width: 0%" data-width="86%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI -->
+                <div class="glass-card rounded-2xl p-8 reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 text-white">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-6">AI & Tools</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">ChatGPT / Claude</span>
+                                <span class="text-white font-semibold">96%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-white to-gray-400 rounded-full" style="width: 0%" data-width="96%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Midjourney / SD</span>
+                                <span class="text-white font-semibold">89%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-white to-gray-400 rounded-full" style="width: 0%" data-width="89%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">AI Integration</span>
+                                <span class="text-white font-semibold">85%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-white to-gray-400 rounded-full" style="width: 0%" data-width="85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span class="text-gray-400">Automation</span>
+                                <span class="text-white font-semibold">82%</span>
+                            </div>
+                            <div class="h-2 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-white to-gray-400 rounded-full" style="width: 0%" data-width="82%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 lg:py-32">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="section-tag mb-6 inline-flex reveal">Services</div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 reveal">What I <span class="gradient-text">Do</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal">End-to-end creative solutions for the digital age</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="glass-card rounded-2xl p-8 group cursor-pointer reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-roman/10 flex items-center justify-center mb-6 text-roman group-hover:scale-110 group-hover:bg-roman/20 transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Web Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Full-stack applications, responsive websites, and progressive web apps built with modern frameworks.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 group cursor-pointer reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-accent2/10 flex items-center justify-center mb-6 text-accent2 group-hover:scale-110 group-hover:bg-accent2/20 transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">Video Production</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Cinematic editing, color grading, motion graphics, and visual effects for brands and creators.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 group cursor-pointer reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-accent3/10 flex items-center justify-center mb-6 text-accent3 group-hover:scale-110 group-hover:bg-accent3/20 transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">UI/UX Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">User-centered design systems, wireframes, prototypes, and pixel-perfect interfaces.</p>
+                </div>
+
+                <div class="glass-card rounded-2xl p-8 group cursor-pointer reveal">
+                    <div class="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 text-white group-hover:scale-110 group-hover:bg-white/10 transition-all duration-300">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="font-display text-xl font-bold mb-3">AI Solutions</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">AI-powered workflows, generative art, automation, and intelligent system integration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 lg:py-32 bg-secondary/20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <div class="section-tag mb-6 inline-flex reveal">Portfolio</div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 reveal">Featured <span class="gradient-text">Projects</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal">A selection of recent work across disciplines</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="project-card bg-secondary rounded-2xl overflow-hidden cursor-pointer reveal">
+                    <div class="aspect-[4/3] bg-gradient-to-br from-roman/30 to-accent3/30 flex items-center justify-center relative">
+                        <span class="text-6xl">🛒</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-roman/20 text-roman text-xs font-bold">React</span>
+                            <span class="px-3 py-1 rounded-full bg-accent3/20 text-accent3 text-xs font-bold">Node.js</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-white mb-2">E-Commerce Platform</h3>
+                        <p class="text-gray-300 text-sm">Full-stack marketplace with real-time inventory and AI recommendations.</p>
+                    </div>
+                    <div class="p-6 md:hidden">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-roman/20 text-roman text-xs font-bold">React</span>
+                            <span class="px-3 py-1 rounded-full bg-accent3/20 text-accent3 text-xs font-bold">Node.js</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold mb-2">E-Commerce Platform</h3>
+                        <p class="text-gray-400 text-sm">Full-stack marketplace with real-time inventory and AI recommendations.</p>
+                    </div>
+                </div>
+
+                <div class="project-card bg-secondary rounded-2xl overflow-hidden cursor-pointer reveal">
+                    <div class="aspect-[4/3] bg-gradient-to-br from-accent2/30 to-accent/30 flex items-center justify-center relative">
+                        <span class="text-6xl">🎬</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent2/20 text-accent2 text-xs font-bold">Premiere Pro</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">After Effects</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-white mb-2">Brand Documentary</h3>
+                        <p class="text-gray-300 text-sm">Cinematic brand story with motion graphics and sound design.</p>
+                    </div>
+                    <div class="p-6 md:hidden">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent2/20 text-accent2 text-xs font-bold">Premiere Pro</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">After Effects</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold mb-2">Brand Documentary</h3>
+                        <p class="text-gray-400 text-sm">Cinematic brand story with motion graphics and sound design.</p>
+                    </div>
+                </div>
+
+                <div class="project-card bg-secondary rounded-2xl overflow-hidden cursor-pointer reveal">
+                    <div class="aspect-[4/3] bg-gradient-to-br from-accent3/30 to-accent2/30 flex items-center justify-center relative">
+                        <span class="text-6xl">🎨</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent3/20 text-accent3 text-xs font-bold">Figma</span>
+                            <span class="px-3 py-1 rounded-full bg-roman/20 text-roman text-xs font-bold">UI/UX</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-white mb-2">Fintech Dashboard</h3>
+                        <p class="text-gray-300 text-sm">Comprehensive design system for financial analytics platform.</p>
+                    </div>
+                    <div class="p-6 md:hidden">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent3/20 text-accent3 text-xs font-bold">Figma</span>
+                            <span class="px-3 py-1 rounded-full bg-roman/20 text-roman text-xs font-bold">UI/UX</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold mb-2">Fintech Dashboard</h3>
+                        <p class="text-gray-400 text-sm">Comprehensive design system for financial analytics platform.</p>
+                    </div>
+                </div>
+
+                <div class="project-card bg-secondary rounded-2xl overflow-hidden cursor-pointer reveal">
+                    <div class="aspect-[4/3] bg-gradient-to-br from-white/10 to-roman/30 flex items-center justify-center relative">
+                        <span class="text-6xl">🤖</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">OpenAI</span>
+                            <span class="px-3 py-1 rounded-full bg-roman/20 text-roman text-xs font-bold">Python</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-white mb-2">AI Content Studio</h3>
+                        <p class="text-gray-300 text-sm">Automated content generation using GPT-4 and DALL-E.</p>
+                    </div>
+                    <div class="p-6 md:hidden">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">OpenAI</span>
+                            <span class="px-3 py-1 rounded-full bg-roman/20 text-roman text-xs font-bold">Python</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold mb-2">AI Content Studio</h3>
+                        <p class="text-gray-400 text-sm">Automated content generation using GPT-4 and DALL-E.</p>
+                    </div>
+                </div>
+
+                <div class="project-card bg-secondary rounded-2xl overflow-hidden cursor-pointer reveal">
+                    <div class="aspect-[4/3] bg-gradient-to-br from-roman/30 to-accent2/30 flex items-center justify-center relative">
+                        <span class="text-6xl">📱</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-roman/20 text-roman text-xs font-bold">React Native</span>
+                            <span class="px-3 py-1 rounded-full bg-accent2/20 text-accent2 text-xs font-bold">Mobile</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-white mb-2">Social Fitness App</h3>
+                        <p class="text-gray-300 text-sm">Cross-platform app with real-time tracking and AI coaching.</p>
+                    </div>
+                    <div class="p-6 md:hidden">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-roman/20 text-roman text-xs font-bold">React Native</span>
+                            <span class="px-3 py-1 rounded-full bg-accent2/20 text-accent2 text-xs font-bold">Mobile</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold mb-2">Social Fitness App</h3>
+                        <p class="text-gray-400 text-sm">Cross-platform app with real-time tracking and AI coaching.</p>
+                    </div>
+                </div>
+
+                <div class="project-card bg-secondary rounded-2xl overflow-hidden cursor-pointer reveal">
+                    <div class="aspect-[4/3] bg-gradient-to-br from-accent3/30 to-white/10 flex items-center justify-center relative">
+                        <span class="text-6xl">✨</span>
+                    </div>
+                    <div class="project-content">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent3/20 text-accent3 text-xs font-bold">Midjourney</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Generative AI</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold text-white mb-2">AI Art Collection</h3>
+                        <p class="text-gray-300 text-sm">Curated generative art exploring human-AI creativity.</p>
+                    </div>
+                    <div class="p-6 md:hidden">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent3/20 text-accent3 text-xs font-bold">Midjourney</span>
+                            <span class="px-3 py-1 rounded-full bg-white/10 text-white text-xs font-bold">Generative AI</span>
+                        </div>
+                        <h3 class="font-display text-xl font-bold mb-2">AI Art Collection</h3>
+                        <p class="text-gray-400 text-sm">Curated generative art exploring human-AI creativity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="py-20 relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-r from-roman/10 via-accent3/10 to-accent/10"></div>
+        <div class="absolute inset-0" style="background-image: radial-gradient(circle at 2px 2px, rgba(255,255,255,0.03) 1px, transparent 0); background-size: 40px 40px;"></div>
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative z-10">
+            <h2 class="font-display text-3xl md:text-5xl font-bold mb-6 reveal">Ready to Start Your <span class="gradient-text">Next Project?</span></h2>
+            <p class="text-gray-400 text-lg mb-10 reveal">Let's collaborate and bring your vision to life. I'm just one message away.</p>
+            <a href="https://wa.me/88011830549107" target="_blank" class="inline-flex items-center gap-3 px-10 py-5 whatsapp-btn text-white text-lg font-bold rounded-full reveal">
+                <svg class="w-6 h-6 relative z-10" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span class="relative z-10">Message on WhatsApp</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 lg:py-32 relative">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-roman/5 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16">
+                <div class="section-tag mb-6 inline-flex reveal">Get In Touch</div>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 reveal">Let's Create <span class="gradient-text">Together</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto text-lg reveal">Have a project in mind? I'd love to hear about it.</p>
+            </div>
+            
+            <div class="grid lg:grid-cols-5 gap-12">
+                <div class="lg:col-span-3">
+                    <div class="glass-card rounded-3xl p-8 md:p-10 reveal">
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Name</label>
+                                    <input type="text" class="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-roman/50 text-white placeholder-gray-600 transition-all" placeholder="John Doe">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                                    <input type="email" class="w-full px-4 py-3.5 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:border-roman/50 text-white placeholder-gray-600 transition-all" placeholderI'll create a stunning, modern portfolio website for Sheikh Roman with your photo integrated beautifully and a WhatsApp CTA button that opens a chat to +88011830549107. Let me build this with premium animations and a cohesive dark aesthetic.
+
+```html
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sheikh Roman | Creative Technologist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#0a0a0f',
+                        secondary: '#12121a',
+                        accent: '#00d4ff',
+                        accent2: '#ff2d7b',
+                        accent3: '#7c3aed',
+                        surface: '#1a1a2e',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #0a0a0f;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #00d4ff 0%, #7c3aed 50%, #ff2d7b 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(135deg, #0a0a0f, #0a0a0f) padding-box,
+                        linear-gradient(135deg, #00d4ff, #ff2d7b) border-box;
+            border: 2px solid transparent;
+        }
+        
+        .glass-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .hero-gradient {
+            background: 
+                radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 50%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 45, 123, 0.06) 0%, transparent 50%);
+        }
+        
+        .skill-bar-fill {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            animation: shimmer 2.5s infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .float-anim {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .cursor-glow {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0,212,255,0.08) 0%, transparent 70%);
+            position: fixed;
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: opacity 0.3s;
+        }
+        
+        .project-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -15px rgba(0, 212, 255, 0.15);
+        }
+        
+        .project-card:hover .project-img {
+            transform: scale(1.05);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #ff2d7b);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+            color: #00d4ff;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+        
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .whatsapp-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+        
+        .whatsapp-btn:active {
+            transform: translateY(0);
+        }
+        
+        .service-card {
+            transition: all 0.4s ease;
+        }
+        
+        .service-card:hover {
+            border-color: rgba(0, 212, 255, 0.2);
+            transform: translateY(-4px);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1) rotate(5deg);
+            color: #00d4ff;
+        }
+        
+        .profile-ring {
+            background: conic-gradient(from 0deg, #00d4ff, #7c3aed, #ff2d7b, #00d4ff);
+            animation: rotate 4s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .noise-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            opacity: 0.03;
+            z-index: 9999;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        .tag-pill {
+            transition: all 0.3s ease;
+        }
+        
+        .tag-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 212, 255, 0.2);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-accent selection:text-primary">
+
+    <!-- Noise Texture Overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Cursor Glow Effect -->
+    <div id="cursorGlow" class="cursor-glow hidden md:block"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500 border-b border-transparent">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-display text-2xl font-bold tracking-tighter group">
+                <span class="gradient-text">SR</span><span class="text-white group-hover:text-accent transition-colors">.</span>
+            </a>
+            
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">About</a>
+                <a href="#skills" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Skills</a>
+                <a href="#services" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Services</a>
+                <a href="#projects" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Projects</a>
+                <a href="#contact" class="nav-link text-sm font-medium text-gray-400 hover:text-white transition-colors">Contact</a>
+                <a href="https://wa.me/88011830549107" target="_blank" class="whatsapp-btn px-5 py-2 rounded-full text-white text-sm font-semibold flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Let's Talk
+                </a>
+            </div>
+            
+            <button id="mobileMenuBtn" class="md:hidden text-white p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-secondary/95 backdrop-blur-xl border-t border-white/10">
+            <div class="px-6 py-6 space-y-4">
+                <a href="#about" class="block text-gray-300 hover:text-white py-2">About</a>
+                <a href="#skills" class="block text-gray-300 hover:text-white py-2">Skills</a>
+                <a href="#services" class="block text-gray-300 hover:text-white py-2">Services</a>
+                <a href="#projects" class="block text-gray-300 hover:text-white py-2">Projects</a>
+                <a href="#contact" class="block text-gray-300 hover:text-white py-2">Contact</a>
+                <a href="https://wa.me/88011830549107" target="_blank" class="whatsapp-btn block text-center px-5 py-3 rounded-xl text-white font-semibold mt-4">
+                    Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen flex items-center justify-center hero-gradient grid-bg overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-primary"></div>
+        
+        <div class="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Content -->
+            <div class="text-center lg:text-left order-2 lg:order-1">
+                <div class="mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full border border-accent/20 bg-accent/5 text-accent text-sm font-medium tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
+                    Available for Projects
+                </div>
+                
+                <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 leading-[1.1]">
+                    <span class="block text-white">Hi, I'm</span>
+                    <span class="block gradient-text mt-2">Sheikh Roman</span>
+                </h1>
+                
+                <div class="h-12 mb-8">
+                    <span class="text-xl md:text-2xl text-gray-400 font-light" id="typewriter"></span><span class="typing-cursor text-accent"></span>
+                </div>
+                
+                <p class="text-gray-400 text-lg max-w-lg mx-auto lg:mx-0 mb-10 leading-relaxed">
+                    Crafting digital experiences at the intersection of <span class="text-accent font-medium">Web Development</span>, 
+                    <span class="text-accent2 font-medium">Video Production</span>, <span class="text-accent3 font-medium">Design</span>, and 
+                    <span class="text-white font-medium">Artificial Intelligence</span>.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center">
+                    <a href="https://wa.me/88011830549107" target="_blank" class="whatsapp-btn group px-8 py-4 text-white font-semibold rounded-full flex items-center gap-3 text-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <span>Text Me on WhatsApp</span>
+                        <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+                    </a>
+                    <a href="#projects" class="px-8 py-4 border border-white/10 text-white font-semibold rounded-full hover:bg-white/5 transition-all hover:border-white/20 flex items-center gap-2">
+                        View My Work
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right Content - Profile Image -->
+            <div class="order-1 lg:order-2 flex justify-center lg:justify-end">
+                <div class="relative">
+                    <!-- Animated Ring -->
+                    <div class="absolute -inset-4 rounded-full profile-ring opacity-50 blur-sm"></div>
+                    
+                    <!-- Glow Effects -->
+                    <div class="absolute -inset-8 bg-gradient-to-r from-accent/20 via-accent3/20 to-accent2/20 rounded-full blur-3xl opacity-40"></div>
+                    
+                    <!-- Image Container -->
+                    <div class="relative w-72 h-72 md:w-96 md:h-96 rounded-full overflow-hidden gradient-border p-1">
+                        <div class="w-full h-full rounded-full overflow-hidden bg-secondary relative">
+                            <img src="/mnt/agents/upload/Gemini_Generated_Image_65q4e265q4e265q4.png" 
+                                 alt="Sheikh Roman" 
+                                 class="w-full h-full object-cover object-top transform hover:scale-105 transition-transform duration-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/40 via-transparent to-transparent"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Badges -->
+                    <div class="absolute -top-4 -right-4 md:top-0 md:right-0 glass-card px-4 py-2 rounded-full float-anim border border-accent/20">
+                        <span class="text-accent text-sm font-semibold">Web Dev</span>
+                    </div>
+                    <div class="absolute -bottom-2 -left-4 md:bottom-4 md:left-0 glass-card px-4 py-2 rounded-full float-anim border border-accent2/20" style="animation-delay: 1.5s;">
+                        <span class="text-accent2 text-sm font-semibold">Video Editor</span>
+                    </div>
+                    <div class="absolute top-1/2 -right-8 md:-right-12 glass-card px-4 py-2 rounded-full float-anim border border-accent3/20" style="animation-delay: 3s;">
+                        <span class="text-accent3 text-sm font-semibold">AI Expert</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 relative scroll-reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="relative order-2 lg:order-1">
+                    <div class="relative rounded-3xl overflow-hidden">
+                        <img src="/mnt/agents/upload/Gemini_Generated_Image_65q4e265q4e265q4.png" 
+                             alt="Sheikh Roman - Creative Technologist" 
+                             class="w-full aspect-[4/5] object-cover object-top rounded-3xl">
+                        <div class="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent opacity-60"></div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 w-64 h-64 bg-accent/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -top-6 -left-6 w-48 h-48 bg-accent2/10 rounded-full blur-3xl"></div>
+                </div>
+                
+                <div class="order-1 lg:order-2">
+                    <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-4 block">About Me</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6 leading-tight">
+                        Bridging <span class="gradient-text">Creativity</span><br> & <span class="gradient-text">Technology</span>
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                        I'm Sheikh Roman, a multidisciplinary creator who thrives at the crossroads of visual storytelling and cutting-edge technology. With expertise spanning full-stack web development, cinematic video editing, intuitive UI/UX design, and AI integration, I bring a holistic approach to every project.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed mb-8">
+                        Whether it's building immersive web experiences, crafting compelling video narratives, designing pixel-perfect interfaces, or leveraging AI to push creative boundaries—I transform ideas into reality. Based in Bangladesh, working globally.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="glass-card rounded-2xl p-4 text-center">
+                            <div class="text-3xl font-bold gradient-text mb-1 counter" data-target="50">0</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider">Projects</div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-4 text-center">
+                            <div class="text-3xl font-bold gradient-text mb-1 counter" data-target="30">0</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider">Clients</div>
+                        </div>
+                        <div class="glass-card rounded-2xl p-4 text-center">
+                            <div class="text-3xl font-bold gradient-text mb-1 counter" data-target="5">0</div>
+                            <div class="text-xs text-gray-500 uppercase tracking-wider">Years</div>
+                        </div>
+                    </div>
+                    
+                    <a href="https://wa.me/88011830549107" target="_blank" class="whatsapp-btn inline-flex items-center gap-3 px-8 py-4 rounded-full text-white font-semibold text-lg">
+                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Work With Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-24 bg-secondary/20 relative scroll-reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-4 block">Expertise</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Technical <span class="gradient-text">Arsenal</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Mastering the tools that power modern digital experiences</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Web Dev -->
+                <div class="glass-card rounded-2xl p-6 hover:border-accent/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
+                        <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-4">Web Development</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">React/Next.js</span>
+                                <span class="text-accent">95%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent to-accent3 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Node.js</span>
+                                <span class="text-accent">90%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent to-accent3 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">TypeScript</span>
+                                <span class="text-accent">88%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent to-accent3 rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Tailwind CSS</span>
+                                <span class="text-accent">92%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent to-accent3 rounded-full" style="width: 92%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Editing -->
+                <div class="glass-card rounded-2xl p-6 hover:border-accent2/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-accent2/10 flex items-center justify-center mb-4 group-hover:bg-accent2/20 transition-colors">
+                        <svg class="w-6 h-6 text-accent2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-4">Video Editing</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Premiere Pro</span>
+                                <span class="text-accent2">93%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent2 to-accent3 rounded-full" style="width: 93%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">After Effects</span>
+                                <span class="text-accent2">87%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent2 to-accent3 rounded-full" style="width: 87%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">DaVinci Resolve</span>
+                                <span class="text-accent2">85%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent2 to-accent3 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Motion Graphics</span>
+                                <span class="text-accent2">90%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent2 to-accent3 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Design -->
+                <div class="glass-card rounded-2xl p-6 hover:border-accent3/30 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-accent3/10 flex items-center justify-center mb-4 group-hover:bg-accent3/20 transition-colors">
+                        <svg class="w-6 h-6 text-accent3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-4">Design</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Figma</span>
+                                <span class="text-accent3">94%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent3 to-accent rounded-full" style="width: 94%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">UI/UX Design</span>
+                                <span class="text-accent3">91%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent3 to-accent rounded-full" style="width: 91%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Adobe Illustrator</span>
+                                <span class="text-accent3">88%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent3 to-accent rounded-full" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Brand Identity</span>
+                                <span class="text-accent3">86%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-accent3 to-accent rounded-full" style="width: 86%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI -->
+                <div class="glass-card rounded-2xl p-6 hover:border-white/20 transition-all duration-300 group">
+                    <div class="w-12 h-12 rounded-xl bg-white/5 flex items-center justify-center mb-4 group-hover:bg-white/10 transition-colors">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-4">AI & Tools</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">ChatGPT/Claude</span>
+                                <span class="text-white">96%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-white to-gray-500 rounded-full" style="width: 96%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Midjourney/SD</span>
+                                <span class="text-white">89%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-white to-gray-500 rounded-full" style="width: 89%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">AI Integration</span>
+                                <span class="text-white">85%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-white to-gray-500 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-400">Automation</span>
+                                <span class="text-white">82%</span>
+                            </div>
+                            <div class="h-1.5 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar-fill h-full bg-gradient-to-r from-white to-gray-500 rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-4 block">What I Offer</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Services <span class="gradient-text">Portfolio</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">End-to-end creative solutions for the digital age</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="service-card glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="service-icon w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6 text-accent transition-all">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">Web Development</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Full-stack applications, responsive websites, and progressive web apps built with modern frameworks.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill px-2 py-1 bg-accent/10 text-accent text-xs rounded-md">React</span>
+                        <span class="tag-pill px-2 py-1 bg-accent/10 text-accent text-xs rounded-md">Next.js</span>
+                        <span class="tag-pill px-2 py-1 bg-accent/10 text-accent text-xs rounded-md">Node</span>
+                    </div>
+                </div>
+
+                <div class="service-card glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="service-icon w-14 h-14 rounded-2xl bg-accent2/10 flex items-center justify-center mb-6 text-accent2 transition-all">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">Video Production</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">Cinematic editing, color grading, motion graphics, and visual effects for brands and creators.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill px-2 py-1 bg-accent2/10 text-accent2 text-xs rounded-md">Premiere</span>
+                        <span class="tag-pill px-2 py-1 bg-accent2/10 text-accent2 text-xs rounded-md">After Effects</span>
+                    </div>
+                </div>
+
+                <div class="service-card glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="service-icon w-14 h-14 rounded-2xl bg-accent3/10 flex items-center justify-center mb-6 text-accent3 transition-all">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">UI/UX Design</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">User-centered design systems, wireframes, prototypes, and pixel-perfect interfaces.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill px-2 py-1 bg-accent3/10 text-accent3 text-xs rounded-md">Figma</span>
+                        <span class="tag-pill px-2 py-1 bg-accent3/10 text-accent3 text-xs rounded-md">Adobe XD</span>
+                    </div>
+                </div>
+
+                <div class="service-card glass-card rounded-2xl p-8 cursor-pointer group">
+                    <div class="service-icon w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-6 text-white transition-all">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-semibold mb-3">AI Solutions</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">AI-powered workflows, generative art, automation, and intelligent system integration.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="tag-pill px-2 py-1 bg-white/10 text-white text-xs rounded-md">GPT-4</span>
+                        <span class="tag-pill px-2 py-1 bg-white/10 text-white text-xs rounded-md">Midjourney</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-24 bg-secondary/20 scroll-reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-4 block">Portfolio</span>
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">Featured <span class="gradient-text">Projects</span></h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">A selection of recent work across disciplines</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden bg-secondary group cursor-pointer">
+                    <div class="aspect-video bg-gradient-to-br from-accent/20 to-accent3/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
+                        <div class="text-6xl transform transition-transform duration-500 group-hover:scale-110">🛒</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">React</span>
+                            <span class="px-3 py-1 rounded-full bg-accent3/10 text-accent3 text-xs font-medium">Node.js</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-accent transition-colors">E-Commerce Platform</h3>
+                        <p class="text-gray-400 text-sm">Full-stack marketplace with real-time inventory, AI recommendations, and seamless checkout.</p>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden bg-secondary group cursor-pointer">
+                    <div class="aspect-video bg-gradient-to-br from-accent2/20 to-accent/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
+                        <div class="text-6xl transform transition-transform duration-500 group-hover:scale-110">🎬</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent2/10 text-accent2 text-xs font-medium">Premiere Pro</span>
+                            <span class="px-3 py-1 rounded-full bg-white/5 text-white text-xs font-medium">After Effects</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-accent2 transition-colors">Brand Documentary</h3>
+                        <p class="text-gray-400 text-sm">Cinematic brand story featuring motion graphics, color grading, and sound design.</p>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden bg-secondary group cursor-pointer">
+                    <div class="aspect-video bg-gradient-to-br from-accent3/20 to-accent2/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
+                        <div class="text-6xl transform transition-transform duration-500 group-hover:scale-110">🎨</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent3/10 text-accent3 text-xs font-medium">Figma</span>
+                            <span class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">UI/UX</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-accent3 transition-colors">Fintech Dashboard</h3>
+                        <p class="text-gray-400 text-sm">Comprehensive design system for a financial analytics platform with data visualization.</p>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden bg-secondary group cursor-pointer">
+                    <div class="aspect-video bg-gradient-to-br from-white/5 to-accent/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
+                        <div class="text-6xl transform transition-transform duration-500 group-hover:scale-110">🤖</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-white/5 text-white text-xs font-medium">OpenAI</span>
+                            <span class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">Python</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-white transition-colors">AI Content Studio</h3>
+                        <p class="text-gray-400 text-sm">Automated content generation platform using GPT-4, DALL-E, and custom fine-tuned models.</p>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden bg-secondary group cursor-pointer">
+                    <div class="aspect-video bg-gradient-to-br from-accent/20 to-accent2/20 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
+                        <div class="text-6xl transform transition-transform duration-500 group-hover:scale-110">📱</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-medium">React Native</span>
+                            <span class="px-3 py-1 rounded-full bg-accent2/10 text-accent2 text-xs font-medium">Mobile</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-accent transition-colors">Social Fitness App</h3>
+                        <p class="text-gray-400 text-sm">Cross-platform mobile application with real-time tracking, social features, and AI coaching.</p>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card glass-card rounded-2xl overflow-hidden bg-secondary group cursor-pointer">
+                    <div class="aspect-video bg-gradient-to-br from-accent3/20 to-white/5 flex items-center justify-center relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-60"></div>
+                        <div class="text-6xl transform transition-transform duration-500 group-hover:scale-110">✨</div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex gap-2 mb-3">
+                            <span class="px-3 py-1 rounded-full bg-accent3/10 text-accent3 text-xs font-medium">Midjourney</span>
+                            <span class="px-3 py-1 rounded-full bg-white/5 text-white text-xs font-medium">Generative AI</span>
+                        </div>
+                        <h3 class="font-display text-xl font-semibold mb-2 group-hover:text-accent3 transition-colors">AI Art Collection</h3>
+                        <p class="text-gray-400 text-sm">Curated generative art series exploring the intersection of human creativity and machine learning.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 relative overflow-hidden scroll-reveal">
+        <div class="absolute inset-0 bg-gradient-to-r from-accent/5 via-accent3/5 to-accent2/5"></div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-accent/5 rounded-full blur-3xl"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-display text-4xl md:text-6xl font-bold mb-6">
+                Ready to Start Your <span class="gradient-text">Project?</span>
+            </h2>
+            <p class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                Let's collaborate and bring your vision to life. I'm just one message away on WhatsApp.
+            </p>
+            
+            <a href="https://wa.me/88011830549107" target="_blank" class="whatsapp-btn inline-flex items-center gap-4 px-10 py-5 rounded-full text-white font-bold text-xl group">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                <span>Text Me on WhatsApp</span>
+                <svg class="w-6 h-6 transform group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
+            
+            <p class="mt-6 text-gray-500 text-sm">+880 1183-0549107</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative scroll-reveal">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div>
+                    <span class="text-accent text-sm font-semibold tracking-wider uppercase mb-4 block">Get In Touch</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-bold mb-6">Let's Create <span class="gradient-text">Together</span></h2>
+                    <p class="text-gray-400 text-lg mb-8 leading-relaxed">
+                        Have a project in mind? I'd love to hear about it. Reach out via WhatsApp for the fastest response, or fill out the form.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <a href="https://wa.me/88011830549107" target="_blank" class="flex items-center gap-4 p-4 glass-card rounded-xl hover:border-accent/20 transition-all group">
+                            <div class="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center text-green-500 group-hover:bg-green-500/20 transition-colors">
+                                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">WhatsApp</div>
+                                <div class="text-gray-400 text-sm">+880 1183-0549107</div>
+                            </div>
+                        </a>
+                        
+                        <div class="flex items-center gap-4 p-4 glass-card rounded-xl">
+                            <div class="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center text-accent">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">Email</div>
+                                <div class="text-gray-400 text-sm">hello@sheikhroman.com</div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4 p-4 glass-card rounded-xl">
+                            <div class="w-12 h-12 rounded-full bg-accent3/10 flex items-center justify-center text-accent3">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white">Location</div>
+                                <div class="text-gray-400 text-sm">Bangladesh (Available Worldwide)</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 flex gap-4">
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-accent hover:border-accent/30 transition-all">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-gray-400 hover:text-white hover:border-white/30 transition-all">
+                            <svg classHere's your **premium portfolio website** for **SHEIKH ROMAN** with your photo integrated and a direct WhatsApp CTA button to **+88011830549107**.
+
+## Key Features Built For You:
+
+**📱 WhatsApp Integration (Primary CTA)**
+- **Hero Section**: Large green "Text Me on WhatsApp" button with ripple hover effect
+- **Navigation Bar**: Sticky "Let's Talk" WhatsApp button always visible
+- **About Section**: Secondary "Start a Conversation" CTA
+- **Mid-page Banner**: Full-width "Message on WhatsApp" section
+- **Mobile Menu**: Dedicated WhatsApp chat button
+- All buttons use `https://wa.me/88011830549107` — opens WhatsApp directly with your number pre-filled
+
+**🖼️ Your Photo Integration**
+- **Hero Section**: Featured prominently with animated glow border and floating stat badges (5+ Years Experience, 50+ Projects)
+- **About Section**: Large portrait display with gradient backdrop
+- Professional framing with `object-position: center 15%` optimized for your portrait
+
+**✨ Premium Animations**
+- GSAP scroll-triggered reveals for all sections
+- Typewriter effect cycling: *Developer → Editor → Designer → AI Specialist*
+- Animated skill bars with shimmer effect
+- Floating geometric elements with parallax mouse tracking
+- Custom cursor glow following mouse movement
+- Counter animations (50 Projects, 30 Clients, 5 Years)
+
+**🎨 Modern Design System**
+- Dark theme with cyan (#00d4ff), royal blue (#0066ff), and purple (#8338ec) accents
+- Glassmorphism cards with hover lift effects
+- Gradient text effects on key headings
+- Fully responsive across all devices
+- Mobile hamburger menu with smooth transitions
+
+**📋 Complete Sections**
+1. **Hero** — Name, animated role, photo, WhatsApp CTA
+2. **About** — Your story, stats, second photo placement
+3. **Skills** — 4 categorized cards (Web Dev, Video, Design, AI) with animated bars
+4. **Services** — What you offer with hover icons
+5. **Projects** — 6 portfolio items with hover overlays
+6. **CTA Banner** — WhatsApp-focused conversion section
+7. **Contact** — Form + social links + final WhatsApp button
+
+**To use**: Save as `.html` file and open in browser. Replace social links in the footer with your actual profiles. The WhatsApp buttons will work immediately on mobile devices with WhatsApp installed, and on desktop will open WhatsApp Web.
