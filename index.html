@@ -56,6 +56,17 @@ tailwind.config = {
   }
   .btn-primary { transition: transform .25s, box-shadow .25s; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(34,211,238,.5); }
+  /* glitch photo cycler */
+  .pic-frame { transition: opacity .12s; }
+  #pic-cycle.glitching .pic-frame { animation: glitch-fx .45s steps(3) both; }
+  @keyframes glitch-fx {
+    0% { transform: translate(0); filter: none; clip-path: inset(0 0 0 0); }
+    20% { transform: translate(-10px, 5px); filter: hue-rotate(90deg) saturate(3); clip-path: inset(12% 0 62% 0); }
+    40% { transform: translate(10px, -7px); filter: hue-rotate(-70deg) contrast(1.6); clip-path: inset(58% 0 8% 0); }
+    60% { transform: translate(-7px, 3px); filter: saturate(4) brightness(1.4); clip-path: inset(28% 0 32% 0); }
+    80% { transform: translate(7px, -3px); filter: invert(.08); clip-path: inset(5% 0 80% 0); }
+    100% { transform: translate(0); filter: none; clip-path: inset(0 0 0 0); }
+  }
 </style>
 </head>
 <body class="noise bg-ink text-white font-body antialiased overflow-x-hidden">
@@ -294,9 +305,18 @@ tailwind.config = {
 <!-- ══════════ ABOUT ══════════ -->
 <section id="about" class="py-24 border-t border-line">
   <div class="max-w-6xl mx-auto px-5 grid md:grid-cols-2 gap-12 items-center">
-    <div class="reveal relative flex justify-center order-2 md:order-1">
+    <div class="reveal relative flex flex-col items-center order-2 md:order-1">
       <div class="absolute -inset-6 bg-gradient-to-tr from-viol/20 to-neon/10 blur-3xl rounded-full"></div>
-      <img src="myimg.png" alt="Sheikh Roman" class="relative w-64 h-64 md:w-80 md:h-80 object-cover rounded-[2rem] border border-line shadow-2xl" />
+      <div id="pic-cycle" class="relative w-64 h-64 md:w-80 md:h-80">
+        <img src="myimg.png" data-pic data-label="real" alt="Sheikh Roman" class="pic-frame absolute inset-0 w-full h-full object-cover rounded-[2rem] border border-line shadow-2xl" style="opacity:1" />
+        <img src="pic-anime.webp" data-pic data-label="anime" alt="" aria-hidden="true" class="pic-frame absolute inset-0 w-full h-full object-cover rounded-[2rem] border border-line shadow-2xl" style="opacity:0" />
+        <img src="pic-minecraft.webp" data-pic data-label="minecraft" alt="" aria-hidden="true" class="pic-frame absolute inset-0 w-full h-full object-cover rounded-[2rem] border border-line shadow-2xl" style="opacity:0" />
+        <img src="pic-robot.webp" data-pic data-label="robot" alt="" aria-hidden="true" class="pic-frame absolute inset-0 w-full h-full object-cover rounded-[2rem] border border-line shadow-2xl" style="opacity:0" />
+      </div>
+      <div class="relative mt-4 glass border border-line rounded-full px-4 py-1.5 text-xs text-white/60 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-neon pulse-dot"></span>
+        <span>style: <span id="pic-label" class="font-semibold text-white">real</span></span>
+      </div>
     </div>
     <div class="order-1 md:order-2">
       <h2 class="reveal font-display text-4xl font-bold tracking-tight mb-5">A builder, not<br/>a <span class="grad-text">template.</span></h2>
@@ -345,6 +365,24 @@ tailwind.config = {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // glitch photo cycler: real -> anime -> minecraft -> robot -> real ...
+  const cycleWrap = document.getElementById('pic-cycle');
+  if (cycleWrap) {
+    const frames = [...cycleWrap.querySelectorAll('[data-pic]')];
+    const picLabel = document.getElementById('pic-label');
+    let pi = 0;
+    setInterval(() => {
+      cycleWrap.classList.add('glitching');
+      setTimeout(() => {
+        frames[pi].style.opacity = 0;
+        pi = (pi + 1) % frames.length;
+        frames[pi].style.opacity = 1;
+        if (picLabel) picLabel.textContent = frames[pi].dataset.label;
+      }, 220);
+      setTimeout(() => cycleWrap.classList.remove('glitching'), 460);
+    }, 1600);
+  }
 </script>
 </body>
 </html>
