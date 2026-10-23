@@ -48,12 +48,6 @@ tailwind.config = {
   .pulse-dot { animation: pulse-dot 1.8s ease-in-out infinite; }
   @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
   .floaty { animation: floaty 6s ease-in-out infinite; }
-  .mesh-bg {
-    background:
-      radial-gradient(600px 400px at 15% 10%, rgba(34,211,238,.14), transparent 60%),
-      radial-gradient(700px 500px at 85% 20%, rgba(167,139,250,.13), transparent 60%),
-      radial-gradient(500px 400px at 50% 90%, rgba(244,114,182,.08), transparent 60%);
-  }
   .btn-primary { transition: transform .25s, box-shadow .25s; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px -8px rgba(34,211,238,.5); }
   /* glitch photo cycler */
@@ -67,6 +61,35 @@ tailwind.config = {
     80% { transform: translate(7px, -3px); filter: invert(.08); clip-path: inset(5% 0 80% 0); }
     100% { transform: translate(0); filter: none; clip-path: inset(0 0 0 0); }
   }
+  /* my picks: hero word reveal */
+  .w-line { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+  .w-word { display: inline-block; transform: translateY(115%); animation: word-up .85s cubic-bezier(.2,.8,.2,1) forwards; }
+  @keyframes word-up { to { transform: translateY(0); } }
+  /* typer caret */
+  .typer-caret { display: inline-block; color: #22d3ee; animation: blink 1s steps(1) infinite; font-weight: 300; }
+  @keyframes blink { 50% { opacity: 0; } }
+  /* aurora hero */
+  .mesh-bg {
+    background:
+      radial-gradient(600px 400px at 15% 10%, rgba(34,211,238,.14), transparent 60%),
+      radial-gradient(700px 500px at 85% 20%, rgba(167,139,250,.13), transparent 60%),
+      radial-gradient(500px 400px at 50% 90%, rgba(244,114,182,.08), transparent 60%);
+    background-size: 180% 180%;
+    animation: aurora 16s ease-in-out infinite alternate;
+  }
+  @keyframes aurora {
+    0% { background-position: 0% 20%; }
+    50% { background-position: 100% 60%; }
+    100% { background-position: 40% 100%; }
+  }
+  /* button shine */
+  .btn-primary { position: relative; overflow: hidden; }
+  .btn-primary::after { content: ''; position: absolute; top: 0; left: -90%; width: 45%; height: 100%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
+    transform: skewX(-20deg); transition: left .65s ease; pointer-events: none; }
+  .btn-primary:hover::after { left: 140%; }
+  /* tilt cards */
+  #work article { will-change: transform; }
 </style>
 </head>
 <body class="noise bg-ink text-white font-body antialiased overflow-x-hidden">
@@ -97,14 +120,19 @@ tailwind.config = {
         <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
         Available for projects — replies within a day
       </div>
-      <h1 class="reveal font-display font-bold tracking-tight leading-[1.02] text-5xl md:text-7xl">
-        I build <span class="grad-text">games, bots</span><br/>& web apps<br/>that actually ship.
+      <h1 id="hero-title" class="font-display font-bold tracking-tight leading-[1.05] text-5xl md:text-7xl">
+        <span class="w-line"><span class="w-word" style="animation-delay:.05s">I</span> <span class="w-word" style="animation-delay:.1s">build</span> <span class="w-word grad-text" style="animation-delay:.15s">games,</span> <span class="w-word grad-text" style="animation-delay:.2s">bots</span></span><br/>
+        <span class="w-line"><span class="w-word" style="animation-delay:.3s">&</span> <span class="w-word" style="animation-delay:.35s">web</span> <span class="w-word" style="animation-delay:.4s">apps</span></span><br/>
+        <span class="w-line"><span class="w-word" style="animation-delay:.5s">that</span> <span class="w-word" style="animation-delay:.55s">actually</span> <span class="w-word" style="animation-delay:.6s">ship.</span></span>
       </h1>
       <p class="reveal mt-6 text-white/60 text-lg max-w-md leading-relaxed">
         Developer & video editor from Dhaka. My AI order-taking bot runs a live shop,
         my 3D games run in your browser — and I cut cinematic videos for local
         businesses and international clients.
       </p>
+      <div class="reveal mt-5 font-display text-xl text-white/85 h-8">
+        <span class="text-neon">▸</span> <span id="role-typer"></span><span class="typer-caret">|</span>
+      </div>
       <div class="reveal mt-8 flex flex-wrap gap-4">
         <a href="#work" class="btn-primary inline-flex items-center gap-2 bg-white text-ink font-semibold px-6 py-3 rounded-full">
           See live work <i data-lucide="arrow-down" class="w-4 h-4"></i>
@@ -114,9 +142,9 @@ tailwind.config = {
         </a>
       </div>
       <div class="reveal mt-10 grid grid-cols-3 gap-6 max-w-md">
-        <div><div class="font-display text-3xl font-bold">6+</div><div class="text-xs text-white/50 mt-1 uppercase tracking-wider">Years building</div></div>
-        <div><div class="font-display text-3xl font-bold">78</div><div class="text-xs text-white/50 mt-1 uppercase tracking-wider">Public repos</div></div>
-        <div><div class="font-display text-3xl font-bold">4</div><div class="text-xs text-white/50 mt-1 uppercase tracking-wider">Projects live</div></div>
+        <div><div class="font-display text-3xl font-bold"><span class="count" data-target="6">0</span>+</div><div class="text-xs text-white/50 mt-1 uppercase tracking-wider">Years building</div></div>
+        <div><div class="font-display text-3xl font-bold"><span class="count" data-target="78">0</span></div><div class="text-xs text-white/50 mt-1 uppercase tracking-wider">Public repos</div></div>
+        <div><div class="font-display text-3xl font-bold"><span class="count" data-target="4">0</span></div><div class="text-xs text-white/50 mt-1 uppercase tracking-wider">Projects live</div></div>
       </div>
     </div>
     <div class="reveal relative flex justify-center">
@@ -349,6 +377,57 @@ tailwind.config = {
     entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: 0.12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // ---- my picks: typer, counters, tilt, magnetic ----
+  // typing roles
+  const typerEl = document.getElementById('role-typer');
+  if (typerEl) {
+    const roles = ['Video Editor', 'Full-Stack Developer', 'AI Builder', 'Game Creator'];
+    let ri = 0, ci = 0, deleting = false;
+    (function tick() {
+      const word = roles[ri];
+      typerEl.textContent = word.slice(0, ci);
+      let delay = deleting ? 40 : 85;
+      if (!deleting && ci === word.length) { delay = 1400; deleting = true; }
+      else if (deleting && ci === 0) { deleting = false; ri = (ri + 1) % roles.length; delay = 350; }
+      ci += deleting ? -1 : 1;
+      setTimeout(tick, delay);
+    })();
+  }
+  // animated counters
+  const cio = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el = e.target, target = +el.dataset.target, t0 = performance.now(), dur = 1300;
+      (function step(t) {
+        const p = Math.min((t - t0) / dur, 1), ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * ease);
+        if (p < 1) requestAnimationFrame(step);
+      })(t0);
+      cio.unobserve(el);
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('.count').forEach(el => cio.observe(el));
+  // 3D tilt on project cards
+  document.querySelectorAll('#work article').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      const x = (e.clientX - r.left) / r.width - 0.5;
+      const y = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `perspective(900px) rotateY(${(x * 7).toFixed(2)}deg) rotateX(${(-y * 7).toFixed(2)}deg) translateY(-6px)`;
+    });
+    card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+  });
+  // magnetic buttons
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = e.clientX - r.left - r.width / 2;
+      const y = e.clientY - r.top - r.height / 2;
+      btn.style.transform = `translate(${(x * 0.16).toFixed(1)}px, ${(y * 0.28).toFixed(1)}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
 
   // glitch photo cycler: real -> anime -> minecraft -> robot -> real ...
   const cycleWrap = document.getElementById('pic-cycle');
