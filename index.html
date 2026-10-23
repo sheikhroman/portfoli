@@ -82,12 +82,30 @@ tailwind.config = {
     50% { background-position: 100% 60%; }
     100% { background-position: 40% 100%; }
   }
-  /* button shine */
-  .btn-primary { position: relative; overflow: hidden; }
+  /* dynamic buttons */
+  .btn-primary { position: relative; overflow: hidden; transition: transform .25s, box-shadow .3s, filter .3s; }
   .btn-primary::after { content: ''; position: absolute; top: 0; left: -90%; width: 45%; height: 100%;
     background: linear-gradient(100deg, transparent, rgba(255,255,255,.55), transparent);
     transform: skewX(-20deg); transition: left .65s ease; pointer-events: none; }
   .btn-primary:hover::after { left: 140%; }
+  .btn-primary:hover { box-shadow: 0 18px 44px -10px rgba(34,211,238,.6); filter: brightness(1.1) saturate(1.15); }
+  .btn-primary:active { filter: brightness(.94); transform: scale(.97) !important; }
+  .btn-ghost { transition: border-color .3s, background .3s, transform .3s cubic-bezier(.2,.8,.2,1), box-shadow .3s; }
+  .btn-ghost:hover { border-color: rgba(34,211,238,.65); background: rgba(34,211,238,.09); transform: translateY(-3px); box-shadow: 0 14px 30px -12px rgba(34,211,238,.45); }
+  .btn-ghost:active { transform: translateY(0) scale(.97); }
+  .btn-ghost svg { transition: transform .3s; }
+  .btn-ghost:hover svg { transform: translateX(4px) scale(1.1); }
+  @keyframes cta-glow { 0%,100% { box-shadow: 0 0 0 0 rgba(34,211,238,.35); } 50% { box-shadow: 0 0 26px 5px rgba(34,211,238,.28); } }
+  .btn-glow { animation: cta-glow 2.8s ease-in-out infinite; }
+  /* link + icon micro-interactions */
+  #work a svg { transition: transform .25s ease; }
+  #work a:hover svg { transform: translate(2px,-2px) scale(1.15); }
+  footer a { transition: transform .25s, color .25s; display: inline-flex; }
+  footer a:hover { transform: translateY(-3px) scale(1.15); }
+  nav a { position: relative; }
+  nav a::after { content:''; position:absolute; left:0; bottom:-4px; width:100%; height:2px; border-radius:2px;
+    background: linear-gradient(90deg,#22d3ee,#a78bfa); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+  nav a:hover::after { transform: scaleX(1); }
   /* tilt cards */
   #work article { will-change: transform; }
 </style>
@@ -137,7 +155,7 @@ tailwind.config = {
         <a href="#work" class="btn-primary inline-flex items-center gap-2 bg-white text-ink font-semibold px-6 py-3 rounded-full">
           See live work <i data-lucide="arrow-down" class="w-4 h-4"></i>
         </a>
-        <a href="https://wa.me/8801830549107" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-line glass font-semibold px-6 py-3 rounded-full hover:border-neon/50 transition">
+        <a href="https://wa.me/8801830549107" target="_blank" rel="noopener" class="btn-ghost inline-flex items-center gap-2 border border-line glass font-semibold px-6 py-3 rounded-full">
           <i data-lucide="message-circle" class="w-4 h-4 text-neon"></i> WhatsApp me
         </a>
       </div>
@@ -350,8 +368,8 @@ tailwind.config = {
     <h2 class="reveal font-display text-4xl md:text-6xl font-bold tracking-tight mb-5">Have something to <span class="grad-text">build?</span></h2>
     <p class="reveal text-white/55 text-lg mb-8">A game, a bot, a web app — tell me the idea, I'll tell you honestly if I can ship it and how fast.</p>
     <div class="reveal flex flex-wrap justify-center gap-4">
-      <a href="https://wa.me/8801830549107" target="_blank" rel="noopener" class="btn-primary inline-flex items-center gap-2 bg-neon text-ink font-semibold px-8 py-4 rounded-full text-lg"><i data-lucide="message-circle" class="w-5 h-5"></i>Start a project</a>
-      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sheikhroman0188@gmail.com" target="_blank" rel="noopener" class="inline-flex items-center gap-2 border border-line glass font-semibold px-8 py-4 rounded-full text-lg hover:border-neon/50 transition"><i data-lucide="mail" class="w-5 h-5 text-neon"></i>Email me</a>
+      <a href="https://wa.me/8801830549107" target="_blank" rel="noopener" class="btn-primary btn-glow inline-flex items-center gap-2 bg-neon text-ink font-semibold px-8 py-4 rounded-full text-lg"><i data-lucide="message-circle" class="w-5 h-5"></i>Start a project</a>
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=sheikhroman0188@gmail.com" target="_blank" rel="noopener" class="btn-ghost inline-flex items-center gap-2 border border-line glass font-semibold px-8 py-4 rounded-full text-lg"><i data-lucide="mail" class="w-5 h-5 text-neon"></i>Email me</a>
     </div>
   </div>
 </section>
