@@ -1,12 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
-    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0891b2"/>
-      <stop offset="38%" stop-color="#6366f1"/>
-      <stop offset="68%" stop-color="#8b5cf6"/>
-      <stop offset="100%" stop-color="#db2777"/>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
     </linearGradient>
   </defs>
-  <text x="256" y="305" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="268" font-weight="900" font-style="italic" letter-spacing="-18" fill="url(#g)">SR</text>
-  <path d="M 84 378 Q 256 446 428 318" fill="none" stroke="url(#g)" stroke-width="24" stroke-linecap="round"/>
+  <text x="256" y="330" text-anchor="middle" font-family="'Caveat', 'Segoe Script', cursive" font-size="340" font-weight="700" fill="url(#g)">SR</text>
+  <path d="M 108 398 Q 256 448 404 378" fill="none" stroke="url(#g)" stroke-width="18" stroke-linecap="round"/>
 </svg>
